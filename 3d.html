@@ -16,9 +16,10 @@
     <a-light type="directional" intensity="0.5" position="-1 1 0"></a-light>
     
     <!-- Вращающийся куб -->
-    <a-entity rotation="0 45 0">
-      <a-box color="#4CC3D9" position="0 2 -5" rotation="0 45 0" scale="2 2 2"></a-box>
+    <a-entity rotation="0 45 0" animation="property: rotation; to: 0 405 0; loop: true; dur: 5000; easing: linear;">
+      <a-box color="#4CC3D9" position="0 2 -5" scale="2 2 2"></a-box>
     </a-entity>
   </a-scene>
 </body>
 </html>
+
