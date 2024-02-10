@@ -1,50 +1,69 @@
- - Privet CILOVEK - 
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Визитка - Яр</title>
+    <title>Крестики-нолики</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 20px;
-        }
         .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            width: 300px;
+            margin: 20px auto;
         }
-        h1 {
-            color: #007bff;
-            text-align: center;
-        }
-        p {
-            line-height: 1.6;
+        .cell {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Привет! Меня зовут Яр</h1>
-        <p>Я школьник, увлекающийся 3D моделированием. С тех пор, как я начал изучать это искусство, я создал множество интересных проектов, таких как рисунки, макеты архитектуры и анимации.</p>
-        <p>Мои проекты получили признание как среди учителей, так и среди моих товарищей. Я также участвовал в различных выставках и конкурсах школы, где поделился своим опытом и знаниями с другими.</p>
-        <p>Мне нравится использовать свои творческие способности, чтобы создавать что-то новое и интересное. Я также готов учиться и развивать свои навыки в области 3D дизайна и анимации еще больше.</p>
-        <p>Если у вас есть какие-либо вопросы или интересы по поводу моей работы, пожалуйста, свяжитесь со мной, используя информацию ниже.</p>
-        <footer>
-            <p>Контакты:</p>
-            <ul>
-                <li>Электронная почта: jar@example.com</li>
-                <li>Телефон: +7 (XXX) XXX-XX-XX</li>
-                <li>Адрес: ул. Школьная, д. 1, Москва, Россия</li>
-            </ul>
-        </footer>
+    <div class="container" id="board">
+        <div class="cell" onclick="makeMove(0)"></div>
+        <div class="cell" onclick="makeMove(1)"></div>
+        <div class="cell" onclick="makeMove(2)"></div>
+        <div class="cell" onclick="makeMove(3)"></div>
+        <div class="cell" onclick="makeMove(4)"></div>
+        <div class="cell" onclick="makeMove(5)"></div>
+        <div class="cell" onclick="makeMove(6)"></div>
+        <div class="cell" onclick="makeMove(7)"></div>
+        <div class="cell" onclick="makeMove(8)"></div>
     </div>
-</body>
-</html>
 
+    <script>
+        let currentPlayer = 'X';
+        let board = ['', '', '', '', '', '', '', '', ''];
+
+        function makeMove(index) {
+            if (board[index] === '') {
+                board[index] = currentPlayer;
+                document.getElementById('board').children[index].innerText = currentPlayer;
+                if (checkWinner()) {
+                    alert(currentPlayer + ' победил!');
+                    resetBoard();
+                    return;
+                }
+                if (checkDraw()) {
+                    alert('Ничья!');
+                    resetBoard();
+                    return;
+                }
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            }
+        }
+
+        function checkWinner() {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+            for (let combination of winningCombinations) {
+                const [a, b, c] = combination;
+                if (board[a] &
